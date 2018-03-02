@@ -10,11 +10,15 @@
     <!--Application css-->
     <link href="/css/style.css" rel="stylesheet">
 </head>
+
 <body class="gray-bg">
 <div id="wrapper">
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Chatify</h2>
+            <h2>Chatify - A realtime socket based chat app</h2>
+            <p>
+                <small><span class="btn btn-warning btn-xs">BETA TESTING</span></small>
+            </p>
             <ol class="breadcrumb">
                 <li>
                     <a href="index.html">Global</a>
@@ -40,28 +44,14 @@
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-md-9">
-                                <div class="chat-discussion">
-                                    <div class="chat-message left">
-                                        <img class="message-avatar" src="/img/default.jpg" alt="">
-                                        <div class="message">
-                                            <a class="message-author" href="#"> Name </a>
-                                            <span class="message-date"> Timestamp </span>
-                                            <span class="message-content">
-											Message
-                                            </span>
-                                        </div>
-                                    </div>
+                                <div class="chat-discussion" id="messages">
+                                    <!--Messages here-->
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="chat-users">
-                                    <div class="users-list">
-                                        <div class="chat-user">
-                                            <img class="chat-avatar" src="img/a4.jpg" alt="">
-                                            <div class="chat-user-name">
-                                                <a href="#">Name</a>
-                                            </div>
-                                        </div>
+                                    <div class="users-list" id="users-list">
+                                        <!--Users list here-->
                                     </div>
                                 </div>
                             </div>
@@ -70,9 +60,14 @@
                             <div class="col-lg-12">
                                 <div class="chat-message-form">
                                     <div class="form-group">
-                                        <textarea class="form-control message-input" name="message"
-                                                  placeholder="Enter message text">
-                                        </textarea>
+                                        <form action="">
+                                            <textarea class="form-control message-input"
+                                                      autocomplete="off"
+                                                      id="m"
+                                                      name="message"
+                                                      placeholder="Enter message text"></textarea>
+                                            <button class="btn btn-warning" type="submit">Send</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

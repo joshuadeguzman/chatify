@@ -15,14 +15,37 @@ $(document).ready(function () {
     });
 
     socket.on('update-chat', function (username, data) {
-        $('#messages').append($('<li>').text(username + ': ' + data));
+        $('#messages').append(
+            `
+            <div class="chat-message left">
+                <img class="message-avatar" src="/img/default.jpg" alt="">
+                <div class="message">
+                    <a class="message-author" href="#"> ` + username + ` </a>
+                    <span class="message-date"> Timestamp </span>
+                    <span class="message-content">
+                    ` + data + `
+                    </span>
+                </div>
+            </div>
+            
+            `
+        );
         window.scrollTo(0, document.body.scrollHeight);
     });
 
     socket.on('update-users', function (data) {
-        $('#user-list').empty();
+        $('#users-list').empty();
         $.each(data, function (key, value) {
-            $('#user-list').append($('<li>').text(key));
+            $('#users-list').append(
+                `
+                <div class="chat-user">
+                    <img class="chat-avatar" src="img/default.jpg" alt="">
+                    <div class="chat-user-name">
+                        <a href="#">` + key + `</a>
+                    </div>
+                </div>
+                `
+            );
         });
 
     });
