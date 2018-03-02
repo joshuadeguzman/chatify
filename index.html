@@ -18,7 +18,7 @@
             padding: 3px;
             position: fixed;
             bottom: 0;
-            width: 100%;
+            width: 90%;
         }
 
         form input {
@@ -52,10 +52,23 @@
         #messages {
             margin-bottom: 40px
         }
+
+        #users {
+            width: 10%;
+            float: right;
+        }
     </style>
 </head>
 <body>
 <ul id="messages"></ul>
+<div id="users">
+    <h2>Global Chatify Room</h2>
+    <br>
+    <h5>Users</h5>
+    <ul id="user-list">
+    </ul>
+</div>
+
 
 <form action="">
     <input id="m" autocomplete="off"/>
@@ -66,8 +79,6 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
-    var socket = io();
-
     $(function () {
         var socket = io();
         $('form').submit(function () {
@@ -83,6 +94,14 @@
         socket.on('update-chat', function (username, data) {
             $('#messages').append($('<li>').text(username + ': ' + data));
             window.scrollTo(0, document.body.scrollHeight);
+        });
+
+        socket.on('update-users', function (data) {
+            $('#user-list').empty();
+            $.each(data, function (key, value) {
+                $('#user-list').append($('<li>').text(key));
+            });
+
         });
     });
 </script>
