@@ -61,12 +61,15 @@
                                 <div class="chat-message-form">
                                     <div class="form-group">
                                         <form action="">
-                                            <textarea class="form-control message-input"
-                                                      autocomplete="off"
-                                                      id="m"
-                                                      name="message"
-                                                      placeholder="Enter message text"></textarea>
-                                            <button class="btn btn-warning" type="submit">Send</button>
+                                            <input
+                                                    type="text"
+                                                    class="form-control message-input"
+                                                    autocomplete="off"
+                                                    id="message"
+                                                    name="message"
+                                                    placeholder="Enter message text"/>
+
+                                            <button class="btn btn-warning pull-right m-r-sm m-t-sm" type="submit">Send</button>
                                         </form>
                                     </div>
                                 </div>
@@ -96,7 +99,7 @@
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
 <!--Application scripts-->
-<script type="text/javascript" src="/js/chatify-socket.js"></script>
+<script type="text/javascript" src="/js/chatify.js"></script>
 
 
 </body>

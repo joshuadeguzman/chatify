@@ -1,8 +1,8 @@
 $(document).ready(function () {
     var socket = io();
     $('form').submit(function () {
-        socket.emit('send-message', $('#m').val());
-        $('#m').val('');
+        socket.emit('send-message', $('#message').val());
+        $('#message').val('');
         return false;
     });
 
@@ -30,7 +30,9 @@ $(document).ready(function () {
             
             `
         );
-        window.scrollTo(0, document.body.scrollHeight);
+
+        var messages = document.getElementById('messages');
+        messages.scrollTop = messages.scrollHeight;
     });
 
     socket.on('update-users', function (data) {
