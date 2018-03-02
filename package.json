@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Chat anywhere, anytime to anyone",
   "dependencies": {
+    "express": "^4.16.2",
     "socket.io": "^2.0.4"
   }
 }
