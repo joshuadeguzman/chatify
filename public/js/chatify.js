@@ -21,7 +21,7 @@ $(document).ready(function () {
                 <img class="message-avatar" src="/img/default.jpg" alt="">
                 <div class="message">
                     <a class="message-author" href="#"> ` + username + ` </a>
-                    <span class="message-date"> Timestamp </span>
+                    <span class="message-date"> ` + moment($.now()).format('MMMM Do YYYY, h:mm:ss a') + `</span>
                     <span class="message-content">
                     ` + data + `
                     </span>
@@ -33,6 +33,11 @@ $(document).ready(function () {
 
         var messages = document.getElementById('messages');
         messages.scrollTop = messages.scrollHeight;
+    });
+
+    socket.on('update-timestamp', function(){
+        $('#last-timestamp').empty();
+        $('#last-timestamp').text(moment($.now()).format('MMMM Do YYYY, h:mm:ss a'));
     });
 
     socket.on('update-users', function (data) {

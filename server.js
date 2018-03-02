@@ -50,6 +50,7 @@ io.on('connection', function (socket) {
 
     // Send message
     socket.on('send-message', function (msg) {
+        io.sockets.emit('update-timestamp');
         io.sockets.emit('update-chat', socket.username, msg);
     });
 
