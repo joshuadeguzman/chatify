@@ -88,7 +88,10 @@
         });
 
         socket.on('connect', function () {
-            socket.emit('add-user', prompt('Please enter your username: '));
+            while(!nickname){
+                var nickname = prompt('Please enter your name: ');
+            };
+            socket.emit('add-user', nickname);
         });
 
         socket.on('update-chat', function (username, data) {
