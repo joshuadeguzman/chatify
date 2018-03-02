@@ -2,5 +2,7 @@
   "name": "chatify",
   "version": "0.0.1",
   "description": "Chat anywhere, anytime to anyone",
-  "dependencies": {}
+  "dependencies": {
+    "socket.io": "^2.0.4"
+  }
 }
