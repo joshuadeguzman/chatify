@@ -2,119 +2,107 @@
 <html>
 <head>
     <title>Chatify</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            font: 13px Helvetica, Arial;
-        }
+    <!--Main css files-->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
 
-        form {
-            background: #000;
-            padding: 3px;
-            position: fixed;
-            bottom: 0;
-            width: 90%;
-        }
-
-        form input {
-            border: 0;
-            padding: 10px;
-            width: 100%;
-            margin-right: .5%;
-        }
-
-        form button {
-            width: 9%;
-            background: rgb(130, 224, 255);
-            border: none;
-            padding: 10px;
-        }
-
-        #messages {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        #messages li {
-            padding: 5px 10px;
-        }
-
-        #messages li:nth-child(odd) {
-            background: #eee;
-        }
-
-        #messages {
-            margin-bottom: 40px
-        }
-
-        #chats {
-            width: 90%;
-            float: right;
-        }
-        #users {
-            width: 10%;
-            float: left;
-            padding-left: 20px;
-        }
-    </style>
+    <!--Application css-->
+    <link href="/css/style.css" rel="stylesheet">
 </head>
-<body>
-<div id="chats">
-    <ul id="messages"></ul>
+<body class="gray-bg">
+<div id="wrapper">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Chatify</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="index.html">Global</a>
+                </li>
+                <li>
+                    <a>Chat rooms</a>
+                </li>
+                <li class="active">
+                    <strong>Chat room #1</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox chat-view">
+                    <div class="ibox-title">
+                        <small class="pull-right text-muted">Last message: Timestamp</small>
+                        Chat room panel
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="chat-discussion">
+                                    <div class="chat-message left">
+                                        <img class="message-avatar" src="/img/default.jpg" alt="">
+                                        <div class="message">
+                                            <a class="message-author" href="#"> Name </a>
+                                            <span class="message-date"> Timestamp </span>
+                                            <span class="message-content">
+											Message
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="chat-users">
+                                    <div class="users-list">
+                                        <div class="chat-user">
+                                            <img class="chat-avatar" src="img/a4.jpg" alt="">
+                                            <div class="chat-user-name">
+                                                <a href="#">Name</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="chat-message-form">
+                                    <div class="form-group">
+                                        <textarea class="form-control message-input" name="message"
+                                                  placeholder="Enter message text">
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="pull-right">
+            Made with love by <strong>devjdg</strong>
+        </div>
+        <div>
+            <strong>Copyright</strong> chatify.devjdg.com &copy; 2018
+        </div>
+    </div>
 </div>
-<div id="users">
-    <h2>Global Chatify Room</h2>
-    <br>
-    <h5>Users</h5>
-    <ul id="user-list">
-    </ul>
-</div>
 
 
-<form action="">
-    <input id="m" autocomplete="off"/>
-    <button>Send</button>
-</form>
+<!--Main scripts-->
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
+<!--Additional plugins-->
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script>
-    $(function () {
-        var socket = io();
-        $('form').submit(function () {
-            socket.emit('send-message', $('#m').val());
-            $('#m').val('');
-            return false;
-        });
+<!--Application scripts-->
+<script type="text/javascript" src="/js/chatify-socket.js"></script>
 
-        socket.on('connect', function () {
-            while(!nickname){
-                var nickname = prompt('Please enter your name: ');
-            };
-            socket.emit('add-user', nickname);
-        });
-
-        socket.on('update-chat', function (username, data) {
-            $('#messages').append($('<li>').text(username + ': ' + data));
-            window.scrollTo(0, document.body.scrollHeight);
-        });
-
-        socket.on('update-users', function (data) {
-            $('#user-list').empty();
-            $.each(data, function (key, value) {
-                $('#user-list').append($('<li>').text(key));
-            });
-
-        });
-    });
-</script>
 
 </body>
 </html>
