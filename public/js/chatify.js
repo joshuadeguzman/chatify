@@ -8,9 +8,9 @@ $(document).ready(function () {
 
     socket.on('connect', function () {
         while (!nickname) {
-            var nickname = prompt('Please enter your name: ');
+            var nickname = prompt('Required: Please enter your name: ');
         }
-        ;
+
         socket.emit('add-user', nickname);
     });
 
