@@ -66,3 +66,6 @@ $ ./ngrok http 8000
 
 Then, serve it, copy the generated url, share it with your friends.
 
+## License
+
+Chatify is under the [Creative Commons License 3.0](https://creativecommons.org/licenses/by/3.0/)
