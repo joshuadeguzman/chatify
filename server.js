@@ -19,13 +19,26 @@ io.on('connection', function (socket) {
         usernames[username] = username;
 
         // Update chat room with 2 param message
-        socket.emit('update-chat', 'SERVER', username +' you have joined the chatify room');
+        socket.emit('update-chat', 'SERVER', username + ' you have joined the chatify room');
 
         // Globally broadcast user who joined the chat room
-        socket.broadcast.emit('update-chat', 'SERVER', username +' has connected to the chatify room');
+        socket.broadcast.emit('update-chat', 'SERVER', username + ' has connected to the chatify room');
 
         // Update pool of users display
         io.sockets.emit('update-users', usernames);
+
+        // Disconnection handler
+        socket.on('disconnect', function () {
+
+            // Delete specific username from the global pool of users
+            delete usernames[username];
+
+            // Update pool of users display
+            io.sockets.emit('update-users', usernames);
+
+            // Globally broadcast user who left the chat room
+            socket.broadcast.emit('update-chat', 'SERVER', username + ' has disconnected from the chatify room');
+        });
 
         // Log
         console.log(username + ' joined the chatify room');
@@ -34,11 +47,11 @@ io.on('connection', function (socket) {
 
     // Send message
     socket.on('send-message', function (msg) {
-        io.sockets.emit('update-chat', socket.username,msg);
+        io.sockets.emit('update-chat', socket.username, msg);
     });
 
 });
 
-http.listen(port, function(){
-  console.log('listening on  ' + port);
+http.listen(port, function () {
+    console.log('listening on  ' + port);
 });
