@@ -1,4 +1,4 @@
-## chatify
+## Chatify
 
 A simple chat app created with socket.io
 
